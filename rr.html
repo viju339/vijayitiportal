@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITI CBT Portal - Vijay Projects</title>
+    <style>
+        :root {
+            --ncvt-blue: #000080;
+            --neon-cyan: #00f2ff;
+            --dark-bg: #0a0b10;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: white; margin: 0; }
+
+        /* Navbar */
+        .navbar { background: var(--ncvt-blue); color: white; padding: 15px; text-align: center; font-size: 1.3rem; font-weight: bold; border-bottom: 3px solid var(--neon-cyan); }
+        .container { max-width: 900px; margin: 20px auto; padding: 15px; position: relative; min-height: 80vh; }
+
+        /* Menu Card */
+        .menu-card { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; margin-bottom: 20px; position: relative; }
+        .menu-header { background: var(--ncvt-blue); padding: 15px; font-weight: bold; }
+        .menu-item { padding: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.3s; }
+        .menu-item:hover { background: rgba(0, 242, 255, 0.1); color: var(--neon-cyan); }
+
+        /* Creator Label Styling: प्रथम पृष्ठावरील नाव (Creator name on first page) */
+        .creator-tag {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .creator-name {
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Exam Box & Timer */
+        .exam-box { background: var(--glass); padding: 30px; border-radius: 15px; border: 1px solid var(--neon-cyan); display: none; }
+        .timer-container { float: right; text-align: center; }
+        .timer-circle { width: 60px; height: 60px; border: 4px solid #ff3e3e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: #ff3e3e; margin-bottom: 5px; }
+
+        .option { display: block; width: 100%; padding: 15px; margin: 12px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; text-align: left; cursor: pointer; }
+        .option:hover { background: rgba(0, 242, 255, 0.2); }
+        .selected { background: var(--neon-cyan) !important; color: black !important; font-weight: bold; }
+
+        /* Result & Review */
+        .result-card { text-align: center; padding: 40px; }
+        .score-big { font-size: 4rem; color: var(--neon-cyan); margin: 10px 0; }
+        .percentage { font-size: 1.5rem; color: #2ecc71; margin-bottom: 30px; }
+        
+        .review-section { text-align: left; margin-top: 30px; display: none; max-height: 400px; overflow-y: auto; border-top: 1px solid #444; padding-top: 20px; }
+        .review-item { padding: 15px; border-left: 5px solid white; background: rgba(255,255,255,0.03); margin-bottom: 10px; }
+
+        .btn { padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+        .btn-next { background: var(--neon-cyan); color: black; }
+        .btn-review { background: #f39c12; color: white; margin-top: 10px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">ITI CBT EXAM PORTAL - NCVT MOCK TEST</div>
+
+<div class="container">
+    
+    <div id="main-menu">
+        <div class="menu-card">
+            <div class="menu-header">SELECT SUBJECT</div>
+            <div class="menu-item" onclick="showMenu('theory-menu')">📄 COPA Theory Mock Test</div>
+            <div class="menu-item" onclick="showMenu('es-menu')">📊 Employability Skills Mock Test</div>
+        </div>
+
+        <div class="creator-tag">
+            <p style="margin-bottom: 5px; opacity: 0.6;">Developed & Designed By</p>
+            <div class="creator-name">VIJAY</div>
+        </div>
+    </div>
+
+    <div id="theory-menu" class="menu-card hidden">
+        <div class="menu-header"><span onclick="showMenu('main-menu')" style="cursor:pointer; margin-right:15px;">←</span> COPA MODULES</div>
+       <div class="menu-item" onclick="startExam('Module1')">Module 1 Introduction To Computers & Computer System | कंप्यूटर एवं कंप्यूटर सिस्टम का परिचय</div>
+
+<div class="menu-item" onclick="startExam('Module2')">Module 2 Windows Operating System | विंडोज ऑपरेटिंग सिस्टम</div>
+
+<div class="menu-item" onclick="startExam('Module3')">Module 3 Introduction To The Booting Process | बूटिंग सिस्टम का परिचय</div>
+
+<div class="menu-item" onclick="startExam('Module4')">Module 4 DOS Command Line Interface & Linux Operating Systems | डॉस कमांड लाइन इंटरफेस और लिनक्स ऑपरेटिंग सिस्टम</div>
+
+<div class="menu-item" onclick="startExam('Module5')">Module 5 Word Processing Software | वर्ड प्रोसेसिंग सॉफ्टवेयर</div>
+    </div>
+
+    <div id="es-menu" class="menu-card hidden">
+        <div class="menu-header"><span onclick="showMenu('main-menu')" style="cursor:pointer; margin-right:15px;">←</span> ES TOPICS</div>
+        <div class="menu-item" onclick="startExam('Employability')">Introduction To Employability Skills | रोजगार कौशल का परिचय</div>
+
+<div class="menu-item" onclick="startExam('Constitutional')">Constitutional Values-Citizenship | संवैधानिक मूल्य: नागरिकता</div>
+
+<div class="menu-item" onclick="startExam('Professional')">Becoming A Professional In The 21st Century | 21वीं सदी में पेशेवर बनना</div>
+
+<div class="menu-item" onclick="startExam('English')">Basic English Skills | बुनियादी अंग्रेजी कौशल</div>
+
+<div class="menu-item" onclick="startExam('Career')">Career Development And Goal Setting | करियर विकास और लक्ष्य निर्धारण</div>
+
+<div class="menu-item" onclick="startExam('Communication')">Communication Skills | संचार कौशल</div>
+    </div>
+
+    <div id="exam-box" class="exam-box">
+        <div class="timer-container">
+            <div class="timer-circle" id="timer">30</div>
+            <small>Seconds</small>
+        </div>
+        <h2 id="sub-title" style="color:var(--neon-cyan)">Subject</h2>
+        <p id="q-count">Question 1/5</p>
+        <hr style="opacity:0.1">
+        <h3 id="q-text">Loading...</h3>
+        <div id="options-box"></div>
+        <div style="margin-top:20px; display:flex; justify-content:space-between;">
+           
+            <button class="btn btn-next" onclick="move(1)">Save & Next</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="menu-card hidden">
+        <div class="result-card">
+            <h1 style="color:var(--neon-cyan)">EXAM FINISHED</h1>
+            <div class="score-big" id="final-score">0/0 Score</div>
+            <div class="percentage" id="final-percent">0% Percentage</div>
+            
+            <button class="btn btn-review" onclick="toggleReview()">Review Answer Sheet</button>
+            <button class="btn btn-next" onclick="location.reload()" style="margin-left:10px;">Restart</button>
+
+            <div id="review-list" class="review-section">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 1. Database (Questions)
+    const db = {
+"Module1": [
+{ q: "What is a computer?", a: "An electronic device", opts: ["A machine for washing clothes", "An electronic device", "A mobile battery", "A TV"] },
+{ q: "What does CPU stand for?", a: "Central Processing Unit", opts: ["Central Process Unit", "Central Processing Unit", "Computer Personal Unit", "Central Program Unit"] },
+{ q: "Which of the following is an input device?", a: "Keyboard", opts: ["Monitor", "Keyboard", "Printer", "Speaker"] },
+{ q: "Which of the following is an output device?", a: "Printer", opts: ["Mouse", "Keyboard", "Printer", "Scanner"] },
+{ q: "What is the brain of the computer?", a: "CPU", opts: ["RAM", "Hard Disk", "CPU", "Keyboard"] },
+{ q: "Which memory is temporary?", a: "RAM", opts: ["ROM", "RAM", "Hard Disk", "SSD"] },
+{ q: "Which memory is permanent?", a: "ROM", opts: ["RAM", "Cache", "ROM", "Register"] },
+{ q: "Which device is used to display output?", a: "Monitor", opts: ["Keyboard", "Mouse", "Monitor", "Scanner"] },
+{ q: "What is the full form of RAM?", a: "Random Access Memory", opts: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"] },
+{ q: "What is the full form of ROM?", a: "Read Only Memory", opts: ["Random Only Memory", "Read Only Memory", "Run Only Memory", "Read Open Memory"] },
+{ q: "Which storage device stores data permanently?", a: "Hard Disk", opts: ["RAM", "Hard Disk", "CPU", "Monitor"] },
+{ q: "Which of these is a pointing device?", a: "Mouse", opts: ["Keyboard", "Monitor", "Mouse", "Printer"] },
+{ q: "Which key is used to delete text?", a: "Backspace", opts: ["Enter", "Backspace", "Shift", "Tab"] },
+{ q: "Which device prints documents on paper?", a: "Printer", opts: ["Scanner", "Printer", "Monitor", "CPU"] },
+{ q: "What is the full form of USB?", a: "Universal Serial Bus", opts: ["Universal System Bus", "Universal Serial Bus", "United Serial Bus", "User Serial Bus"] },
+],
+"Module2": [
+{ q: "What is Windows?", a: "Operating System", opts: ["Application Software", "Operating System", "Hardware", "Browser"] },
+{ q: "Who developed Windows Operating System?", a: "Microsoft", opts: ["Google", "Apple", "Microsoft", "IBM"] },
+{ q: "Which button is used to open the Start Menu?", a: "Start Button", opts: ["Close Button", "Start Button", "Refresh Button", "Power Button"] },
+{ q: "Which shortcut key is used to copy?", a: "Ctrl + C", opts: ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"] },
+{ q: "Which shortcut key is used to paste?", a: "Ctrl + V", opts: ["Ctrl + P", "Ctrl + V", "Ctrl + X", "Ctrl + A"] },
+{ q: "Which shortcut key is used to cut?", a: "Ctrl + X", opts: ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"] },
+{ q: "Which shortcut key is used to undo?", a: "Ctrl + Z", opts: ["Ctrl + A", "Ctrl + Y", "Ctrl + Z", "Ctrl + P"] },
+{ q: "Which shortcut key is used to select all?", a: "Ctrl + A", opts: ["Ctrl + A", "Ctrl + C", "Ctrl + X", "Ctrl + F"] },
+{ q: "What is the default file manager in Windows?", a: "File Explorer", opts: ["Chrome", "File Explorer", "Paint", "Control Panel"] },
+{ q: "Which feature is used to remove unwanted files?", a: "Recycle Bin", opts: ["Taskbar", "Recycle Bin", "Desktop", "Folder"] },
+{ q: "What is the main screen of Windows called?", a: "Desktop", opts: ["Folder", "Desktop", "Window", "Menu"] },
+{ q: "Which bar is located at the bottom of Windows screen?", a: "Taskbar", opts: ["Toolbar", "Menu Bar", "Taskbar", "Address Bar"] },
+{ q: "Which option is used to shut down computer?", a: "Shut Down", opts: ["Restart", "Sleep", "Shut Down", "Refresh"] },
+{ q: "Which key is used to rename a file?", a: "F2", opts: ["F1", "F2", "F5", "F12"] },
+{ q: "Which key is used to refresh desktop?", a: "F5", opts: ["F2", "F5", "F8", "F10"] },
+{ q: "Which shortcut key opens File Explorer?", a: "Windows + E", opts: ["Windows + D", "Windows + E", "Windows + R", "Windows + L"] },
+{ q: "Which shortcut key locks the computer?", a: "Windows + L", opts: ["Windows + L", "Windows + D", "Windows + E", "Ctrl + L"] },
+],
+"Module3" : [
+{ q: "What is booting?", a: "Starting a computer", opts: ["Shutting down computer", "Starting a computer", "Formatting computer", "Installing software"] },
+{ q: "What is the booting process?", a: "Loading Operating System", opts: ["Deleting files", "Loading Operating System", "Playing games", "Formatting disk"] },
+{ q: "What happens first when computer starts?", a: "POST", opts: ["Desktop opens", "POST", "Shutdown", "Browser starts"] },
+{ q: "What is the full form of POST?", a: "Power On Self Test", opts: ["Power Off Self Test", "Power On Self Test", "Program On Self Test", "Power Operating System Test"] },
+{ q: "What does BIOS stand for?", a: "Basic Input Output System", opts: ["Binary Input Output System", "Basic Input Output System", "Basic Internal Output System", "Boot Input Output System"] },
+{ q: "What is the function of BIOS?", a: "Starts computer hardware", opts: ["Plays music", "Starts computer hardware", "Edits files", "Prints documents"] },
+{ q: "Which type of boot occurs when PC starts from off state?", a: "Cold Boot", opts: ["Warm Boot", "Cold Boot", "Soft Boot", "Quick Boot"] },
+{ q: "Which boot occurs when system restarts?", a: "Warm Boot", opts: ["Cold Boot", "Warm Boot", "Normal Boot", "Fast Boot"] },
+{ q: "Which key is often used to enter BIOS setup?", a: "Delete", opts: ["F1", "Delete", "Shift", "Ctrl"] },
+{ q: "What is UEFI?", a: "Modern BIOS", opts: ["Windows Software", "Modern BIOS", "Linux Tool", "Programming Language"] },
+{ q: "Which device stores Operating System?", a: "Hard Disk", opts: ["Mouse", "Monitor", "Hard Disk", "Keyboard"] },
+{ q: "What is boot loader?", a: "Program that loads OS", opts: ["Music Player", "Program that loads OS", "Browser", "Game"] },
+{ q: "What is the final stage of booting?", a: "Desktop appears", opts: ["Shutdown", "Desktop appears", "POST starts", "BIOS opens"] },
+{ q: "What is restart in computer?", a: "Rebooting computer", opts: ["Turning off PC", "Deleting files", "Rebooting computer", "Formatting disk"] },
+{ q: "Which boot type is faster?", a: "Warm Boot", opts: ["Cold Boot", "Warm Boot", "Hard Boot", "Manual Boot"] },
+{ q: "What checks hardware during startup?", a: "POST", opts: ["Excel", "POST", "Browser", "Paint"] },
+],
+"Module4" : [
+{ q: "What is DOS?", a: "Disk Operating System", opts: ["Disk Operating System", "Data Operating System", "Desktop Operating System", "Digital Operating System"] },
+{ q: "What is CLI?", a: "Command Line Interface", opts: ["Command Line Interface", "Computer Line Interface", "Control Line Interface", "Common Line Interface"] },
+{ q: "Which command is used to clear screen in DOS?", a: "CLS", opts: ["CLS", "CLEAR", "DELETE", "EXIT"] },
+{ q: "Which command shows files and folders in DOS?", a: "DIR", opts: ["LIST", "DIR", "SHOW", "FILES"] },
+{ q: "Which DOS command is used to change directory?", a: "CD", opts: ["MD", "DIR", "CD", "RD"] },
+{ q: "Which DOS command creates a new folder?", a: "MD", opts: ["CD", "MD", "DEL", "DIR"] },
+{ q: "Which DOS command deletes a directory?", a: "RD", opts: ["DEL", "RD", "CLS", "CD"] },
+{ q: "Which command is used to delete a file in DOS?", a: "DEL", opts: ["DELETE", "REMOVE", "DEL", "CLS"] },
+{ q: "Which command exits Command Prompt?", a: "EXIT", opts: ["END", "QUIT", "EXIT", "STOP"] },
+{ q: "What is Linux?", a: "Operating System", opts: ["Browser", "Programming Language", "Operating System", "Application"] },
+{ q: "Who developed Linux?", a: "Linus Torvalds", opts: ["Bill Gates", "Steve Jobs", "Linus Torvalds", "Mark Zuckerberg"] },
+{ q: "Which operating system is open source?", a: "Linux", opts: ["Windows", "Linux", "DOS", "MacOS"] },
+{ q: "Which command displays current directory in Linux?", a: "pwd", opts: ["pwd", "dir", "show", "path"] },
+{ q: "Which command lists files in Linux?", a: "ls", opts: ["ls", "list", "show", "files"] },
+{ q: "Which Linux command changes directory?", a: "cd", opts: ["cd", "move", "change", "dir"] },
+],
+"Module5" : [
+{ q: "What is word processing software?", a: "Software used to create documents", opts: ["Software used to create documents", "Software for games", "Software for videos", "Software for coding"] },
+{ q: "Which software is used for word processing?", a: "MS Word", opts: ["MS Paint", "MS Word", "Excel", "Chrome"] },
+{ q: "What is the default extension of MS Word file?", a: ".docx", opts: [".txt", ".docx", ".xlsx", ".pptx"] },
+{ q: "Which shortcut key is used to copy text?", a: "Ctrl + C", opts: ["Ctrl + X", "Ctrl + V", "Ctrl + C", "Ctrl + Z"] },
+{ q: "Which shortcut key is used to cut text?", a: "Ctrl + X", opts: ["Ctrl + C", "Ctrl + X", "Ctrl + V", "Ctrl + A"] },
+{ q: "Which shortcut key is used to paste text?", a: "Ctrl + V", opts: ["Ctrl + V", "Ctrl + P", "Ctrl + S", "Ctrl + X"] },
+{ q: "Which shortcut key is used to save document?", a: "Ctrl + S", opts: ["Ctrl + P", "Ctrl + O", "Ctrl + S", "Ctrl + N"] },
+{ q: "Which shortcut key is used to print document?", a: "Ctrl + P", opts: ["Ctrl + S", "Ctrl + P", "Ctrl + D", "Ctrl + A"] },
+{ q: "Which option is used to make text bold?", a: "Bold", opts: ["Italic", "Underline", "Bold", "Highlight"] },
+{ q: "Which option is used to slant text?", a: "Italic", opts: ["Italic", "Bold", "Underline", "Center"] },
+{ q: "Which option adds line below text?", a: "Underline", opts: ["Bold", "Italic", "Underline", "Color"] },
+{ q: "Which alignment puts text in center?", a: "Center Align", opts: ["Left Align", "Right Align", "Center Align", "Justify"] },
+{ q: "Which feature checks spelling mistakes?", a: "Spell Check", opts: ["Translate", "Spell Check", "Auto Save", "Find"] },
+{ q: "Which tab is used for inserting pictures?", a: "Insert", opts: ["Home", "Insert", "Layout", "View"] },
+],
+"Employability" : [
+{ q: "What are employability skills?", a: "Skills needed to get and maintain a job", opts: ["Only computer skills", "Skills needed to get and maintain a job", "Only sports skills", "Only communication in English"] },
+{ q: "Which of the following is an employability skill?", a: "Communication", opts: ["Gaming", "Communication", "Sleeping", "Watching TV"] },
+{ q: "What is teamwork?", a: "Working together to achieve a goal", opts: ["Working alone always", "Working together to achieve a goal", "Fighting in group", "Avoiding group work"] },
+{ q: "Why is communication important?", a: "To share information clearly", opts: ["To confuse others", "To share information clearly", "To waste time", "To avoid speaking"] },
+{ q: "What is time management?", a: "Using time effectively", opts: ["Wasting time", "Sleeping all day", "Using time effectively", "Avoiding work"] },
+{ q: "Which is a good workplace attitude?", a: "Positive attitude", opts: ["Rude behavior", "Positive attitude", "Ignoring work", "Arguing with team"] },
+{ q: "What is self-confidence?", a: "Belief in your own abilities", opts: ["Fear of failure", "Belief in your own abilities", "Avoiding challenges", "Dependence on others"] },
+{ q: "Which skill helps in solving problems?", a: "Problem-solving skill", opts: ["Sleeping skill", "Problem-solving skill", "Typing skill", "Watching skill"] },
+{ q: "What is professionalism?", a: "Proper behavior at workplace", opts: ["Careless attitude", "Proper behavior at workplace", "Playing games", "Avoiding responsibility"] },
+{ q: "Why are employability skills important?", a: "To get better job opportunities", opts: ["To waste time", "To get better job opportunities", "To avoid work", "To reduce skills"] }
+],
+"Constitutional" : [
+{ q: "Who is known as the Father of the Indian Constitution?", a: "Dr. B. R. Ambedkar", opts: ["Mahatma Gandhi", "Jawaharlal Nehru", "Dr. B. R. Ambedkar", "Subhash Chandra Bose"] },
+{ q: "When did the Constitution of India come into effect?", a: "26 January 1950", opts: ["15 August 1947", "26 November 1949", "26 January 1950", "2 October 1950"] },
+{ q: "What is the minimum voting age in India?", a: "18 years", opts: ["16 years", "18 years", "21 years", "25 years"] },
+{ q: "Which Fundamental Right ensures equality before law?", a: "Right to Equality", opts: ["Right to Freedom", "Right to Equality", "Right to Education", "Right to Religion"] },
+{ q: "Who is the constitutional head of India?", a: "President", opts: ["Prime Minister", "President", "Governor", "Chief Minister"] },
+{ q: "Who is the head of the Government of India?", a: "Prime Minister", opts: ["President", "Prime Minister", "Governor", "Chief Justice"] },
+{ q: "What does secularism mean?", a: "Equal respect for all religions", opts: ["One religion only", "Equal respect for all religions", "No religion", "Only government religion"] },
+{ q: "Which institution protects the Constitution of India?", a: "Supreme Court", opts: ["Police", "Army", "Supreme Court", "Municipal Corporation"] },
+{ q: "What is democracy?", a: "Government by the people", opts: ["Rule by King", "Government by the people", "Military Rule", "Company Rule"] },
+{ q: "Which body conducts elections in India?", a: "Election Commission", opts: ["Supreme Court", "Election Commission", "Police Department", "Parliament"] },
+{ q: "What is the name of the law-making body in India?", a: "Parliament", opts: ["Court", "Parliament", "Police", "Municipality"] },
+],
+ "Professional" : [
+{ q: "Which skill is important to become a professional in the 21st century?", a: "Communication Skill", opts: ["Sleeping Skill", "Communication Skill", "Ignoring Work", "Avoiding Teamwork"] },
+{ q: "What does professionalism mean?", a: "Responsible behavior at work", opts: ["Late coming", "Responsible behavior at work", "Avoiding duties", "Ignoring rules"] },
+{ q: "Which quality helps a person work effectively with others?", a: "Teamwork", opts: ["Laziness", "Teamwork", "Carelessness", "Anger"] },
+{ q: "Why is time management important?", a: "To complete work on time", opts: ["To waste time", "To complete work on time", "To avoid work", "To delay tasks"] },
+{ q: "Which skill helps in solving problems at work?", a: "Problem Solving Skill", opts: ["Sleeping", "Problem Solving Skill", "Ignoring Issues", "Avoiding Work"] },
+{ q: "What is the importance of digital literacy in the 21st century?", a: "Using technology effectively", opts: ["Avoiding Computers", "Using technology effectively", "Ignoring Internet", "Watching TV only"] },
+{ q: "Which behavior shows professionalism?", a: "Punctuality", opts: ["Coming Late", "Punctuality", "Ignoring Rules", "Carelessness"] },
+{ q: "Why is communication important in the workplace?", a: "To share ideas clearly", opts: ["To create confusion", "To share ideas clearly", "To avoid discussion", "To waste time"] },
+{ q: "Which attitude is expected from a professional employee?", a: "Positive Attitude", opts: ["Negative Attitude", "Positive Attitude", "Careless Attitude", "Angry Attitude"] },
+{ q: "What is adaptability?", a: "Ability to adjust to changes", opts: ["Avoiding Change", "Ability to adjust to changes", "Ignoring Work", "Stopping Learning"] },
+{ q: "Why is lifelong learning important?", a: "To improve skills and knowledge", opts: ["To avoid education", "To improve skills and knowledge", "To stop learning", "To waste time"] },
+{ q: "Which skill helps in making correct decisions?", a: "Critical Thinking", opts: ["Carelessness", "Critical Thinking", "Guessing", "Ignoring Problems"] },
+{ q: "What is one key feature of a 21st-century professional?", a: "Continuous Learning", opts: ["Avoiding Responsibility", "Continuous Learning", "Ignoring Technology", "Working Alone"] }
+ ],
+ "English" : [
+{ q: "Which word is a noun?", a: "School", opts: ["Run", "Beautiful", "School", "Quickly"] },
+{ q: "Which word is a verb?", a: "Write", opts: ["Table", "Beautiful", "Write", "Slowly"] },
+{ q: "Choose the correct greeting for morning time.", a: "Good Morning", opts: ["Good Night", "Good Evening", "Good Morning", "Bye"] },
+{ q: "Which sentence is correct?", a: "He is going to school.", opts: ["He going school.", "He is going to school.", "He go to school.", "Going he school."] },
+{ q: "What is the plural of 'Child'?", a: "Children", opts: ["Childs", "Children", "Childes", "Childrens"] },
+{ q: "Which word is an adjective?", a: "Beautiful", opts: ["Run", "Beautiful", "Slowly", "Table"] },
+{ q: "Choose the correct spelling.", a: "Computer", opts: ["Computar", "Compyuter", "Computer", "Computor"] },
+{ q: "Which punctuation mark is used at the end of a question?", a: "Question Mark (?)", opts: ["Comma (,)", "Full Stop (.)", "Question Mark (?)", "Colon (:)"] },
+{ q: "What is the opposite of 'Hot'?", a: "Cold", opts: ["Warm", "Cold", "Fast", "High"] },
+{ q: "Choose the correct sentence.", a: "I am learning English.", opts: ["I learning English.", "I am learning English.", "Am I learning English.", "I learnings English."] },
+{ q: "Which word is a pronoun?", a: "He", opts: ["Book", "He", "Run", "Blue"] },
+{ q: "What is the past tense of 'Go'?", a: "Went", opts: ["Goed", "Gone", "Went", "Going"] },
+{ q: "Which article is used before a vowel sound?", a: "An", opts: ["A", "The", "An", "No Article"] }
+ ],
+ "Career" : [
+{ q: "What is the first step in career development?", a: "Setting Career Goals", opts: ["Ignoring Skills", "Setting Career Goals", "Avoiding Planning", "Changing Jobs"] },
+{ q: "Why is goal setting important?", a: "To achieve success", opts: ["To waste time", "To achieve success", "To avoid work", "To delay progress"] },
+{ q: "What is a short-term goal?", a: "A goal achieved in a short time", opts: ["A lifelong goal", "A goal achieved in a short time", "A difficult goal", "No goal"] },
+{ q: "What is a long-term goal?", a: "A goal achieved over a long period", opts: ["A daily task", "A goal achieved over a long period", "A quick decision", "No planning"] },
+{ q: "Which skill helps in career growth?", a: "Communication Skill", opts: ["Carelessness", "Communication Skill", "Laziness", "Ignoring Learning"] },
+{ q: "Why is self-assessment important in career planning?", a: "To identify strengths and weaknesses", opts: ["To waste time", "To identify strengths and weaknesses", "To avoid learning", "To ignore skills"] },
+{ q: "What does SMART goal mean?", a: "Specific, Measurable, Achievable, Relevant, Time-bound", opts: ["Simple, Modern, Active, Real, Timely", "Specific, Measurable, Achievable, Relevant, Time-bound", "Short, Medium, Active, Real, Tough", "Strong, Meaningful, Accurate, Responsible, Target"] },
+{ q: "Which habit helps in achieving career goals?", a: "Time Management", opts: ["Late Coming", "Time Management", "Carelessness", "Avoiding Responsibility"] },
+{ q: "Why is continuous learning important for career growth?", a: "To improve knowledge and skills", opts: ["To stop learning", "To improve knowledge and skills", "To waste time", "To avoid challenges"] },
+{ q: "What is the importance of career planning?", a: "To achieve career success", opts: ["To avoid goals", "To achieve career success", "To waste time", "To ignore opportunities"] },
+{ q: "Which factor is important while choosing a career?", a: "Interest and Skills", opts: ["Friend’s Choice", "Interest and Skills", "Random Decision", "No Planning"] },
+{ q: "What helps a person stay focused on goals?", a: "Self-Discipline", opts: ["Laziness", "Self-Discipline", "Ignoring Work", "Carelessness"] },
+{ q: "Which attitude supports career development?", a: "Positive Attitude", opts: ["Negative Thinking", "Positive Attitude", "Avoiding Learning", "Carelessness"] }
+ ],
+ "Communication":[
+{ q: "What is communication?", a: "Exchange of information", opts: ["Playing games", "Exchange of information", "Sleeping", "Ignoring people"] },
+{ q: "Which skill is important for effective communication?", a: "Listening", opts: ["Ignoring", "Listening", "Sleeping", "Avoiding"] },
+{ q: "Which type of communication uses spoken words?", a: "Verbal Communication", opts: ["Written Communication", "Non-Verbal Communication", "Verbal Communication", "Visual Communication"] },
+{ q: "What is non-verbal communication?", a: "Communication without words", opts: ["Talking loudly", "Communication without words", "Writing messages", "Reading books"] },
+{ q: "Which of the following is an example of written communication?", a: "Email", opts: ["Phone Call", "Email", "Face Expression", "Hand Gesture"] },
+{ q: "Why is active listening important?", a: "To understand messages clearly", opts: ["To ignore others", "To understand messages clearly", "To avoid talking", "To waste time"] },
+{ q: "Which communication method is used in meetings?", a: "Verbal Communication", opts: ["Drawing", "Verbal Communication", "Sleeping", "Avoiding discussion"] },
+{ q: "What is the purpose of communication?", a: "To share ideas and information", opts: ["To confuse others", "To share ideas and information", "To avoid work", "To waste time"] },
+{ q: "Which of the following is a barrier to communication?", a: "Noise", opts: ["Listening", "Noise", "Understanding", "Feedback"] },
+{ q: "Which quality improves communication?", a: "Confidence", opts: ["Fear", "Confidence", "Confusion", "Silence"] },
+{ q: "What does body language include?", a: "Gestures and facial expressions", opts: ["Only speaking", "Gestures and facial expressions", "Only writing", "Only listening"] },
+{ q: "Which skill helps in speaking clearly and effectively?", a: "Speaking Skill", opts: ["Sleeping Skill", "Speaking Skill", "Ignoring Skill", "Avoiding Skill"] },
+]};
+
+    let currentSet = [], idx = 0, userAnswers = [], timeLeft = 30, timerInterval;
+
+    // 2. Navigation Functions
+    function showMenu(menuId) {
+        document.getElementById('main-menu').classList.add('hidden');
+        document.getElementById('theory-menu').classList.add('hidden');
+        document.getElementById('es-menu').classList.add('hidden');
+        document.getElementById('exam-box').style.display = 'none';
+        
+        if (menuId === 'main-menu') {
+            document.getElementById('main-menu').classList.remove('hidden');
+        } else {
+            document.getElementById(menuId).classList.remove('hidden');
+        }
+    }
+
+    // 3. Start Exam
+    function startExam(sub) {
+        currentSet = db[sub] || db["Python"];
+        userAnswers = Array(currentSet.length).fill(null);
+        idx = 0;
+        document.getElementById('main-menu').classList.add('hidden');
+        document.getElementById('theory-menu').classList.add('hidden');
+        document.getElementById('es-menu').classList.add('hidden');
+        document.getElementById('exam-box').style.display = 'block';
+        document.getElementById('sub-title').innerText = sub;
+        loadQuestion();
+    }
+
+    // 4. Load Question & 30s Timer
+    function loadQuestion() {
+        clearInterval(timerInterval);
+        timeLeft = 30;
+        document.getElementById('timer').innerText = timeLeft;
+        
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').innerText = timeLeft;
+            if(timeLeft <= 0) move(1);
+        }, 1000);
+
+        const qData = currentSet[idx];
+        document.getElementById('q-count').innerText = `Question ${idx + 1}/${currentSet.length}`;
+        document.getElementById('q-text').innerText = qData.q;
+        
+        const box = document.getElementById('options-box');
+        box.innerHTML = '';
+        qData.opts.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = `option ${userAnswers[idx] === opt ? 'selected' : ''}`;
+            btn.innerText = opt;
+            btn.onclick = () => { userAnswers[idx] = opt; loadQuestion(); };
+            box.appendChild(btn);
+        });
+    }
+
+    function move(step) {
+        if (idx + step >= 0 && idx + step < currentSet.length) {
+            idx += step;
+            loadQuestion();
+        } else if (idx + step >= currentSet.length) {
+            autoResult();
+        }
+    }
+
+    
+    function autoResult() {
+        clearInterval(timerInterval);
+        document.getElementById('exam-box').style.display = 'none';
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        let score = 0;
+        let reviewHtml = '';
+        currentSet.forEach((item, i) => {
+            const isCorrect = userAnswers[i] === item.a;
+            if(isCorrect) score++;
+            reviewHtml += `
+                <div class="review-item" style="border-color: ${isCorrect ? '#2ecc71' : '#ff3e3e'}">
+                    <strong>Q${i+1}: ${item.q}</strong><br>
+                    <span style="color:${isCorrect ? '#2ecc71' : '#ff9999'}">Your Answer: ${userAnswers[i] || 'Skipped'}</span><br>
+                    <span style="color:var(--neon-cyan)">Correct Answer: ${item.a}</span>
+                </div>`;
+        });
+
+        const percent = Math.round((score / currentSet.length) * 100);
+        document.getElementById('final-score').innerText = `${score} / ${currentSet.length} Score`;
+        document.getElementById('final-percent').innerText = `${percent}% Percentage`;
+        document.getElementById('review-list').innerHTML = reviewHtml;
+    }
+
+    function toggleReview() {
+        const list = document.getElementById('review-list');
+        list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // //this code use for collect Data of Student
+    function autoResult() {
+    clearInterval(timerInterval);
+    document.getElementById('exam-box').style.display = 'none';
+    document.getElementById('result-screen').classList.remove('hidden');
+
+    const studentName = document.getElementById('student-name').value;
+    let rightCount = 0;
+    let wrongCount = 0;
+    let skippedCount = 0;
+    let reviewHtml = '';
+
+    currentSet.forEach((item, i) => {
+        const userAnswer = userAnswers[i];
+        if (userAnswer === null) {
+            skippedCount++;
+        } else if (userAnswer === item.a) {
+            rightCount++;
+        } else {
+            wrongCount++;
+        }
+
+        const isCorrect = userAnswer === item.a;
+        reviewHtml += `
+            <div class="review-item" style="border-color: ${isCorrect ? '#2ecc71' : (userAnswer === null ? '#f39c12' : '#ff3e3e')}">
+                <strong>Q${i+1}: ${item.q}</strong><br>
+                <span style="color:${isCorrect ? '#2ecc71' : '#ff9999'}">Your Answer: ${userAnswer || 'Skipped'}</span><br>
+                <span style="color:var(--neon-cyan)">Correct Answer: ${item.a}</span>
+            </div>`;
+    });
+
+    const percent = Math.round((rightCount / currentSet.length) * 100);
+
+    // विद्यार्थ्याला स्क्रीनवर निकाल दाखवणे
+    document.getElementById('res-name').innerText = studentName;
+    document.getElementById('res-right').innerText = rightCount;
+    document.getElementById('res-wrong').innerText = wrongCount;
+    document.getElementById('res-skipped').innerText = skippedCount;
+
+    document.getElementById('final-score').innerText = `${rightCount} / ${currentSet.length}`;
+    document.getElementById('final-percent').innerText = `${percent}% Percentage`;
+    document.getElementById('review-list').innerHTML = reviewHtml;
+
+    // 🚀 FORMSPREE AUTO-DATA SYNC LOGIC (गुपचूप ईमेल जाणे)
+    // ⚠️ तुमच्या Formspree चा ID इथे टाका (उदा. "xbjnyqzk")
+    const formspreeId = "https://formspree.io/f/xkoegqgk"; 
+
+    // डेटा गोळा करणे
+    const dataToSend = {
+        studentName: studentName,
+        correctAnswers: rightCount,
+        wrongAnswers: wrongCount,
+        skippedQuestions: skippedCount,
+        totalScore: `${rightCount} / ${currentSet.length}`,
+        percentage: `${percent}%`
+    };
+
+    // AJAX / Fetch द्वारे बॅकग्राउंडला डेटा Formspree कडे पाठवणे
+    fetch(`https://formspree.io/f/${xkoegqgk}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(dataToSend)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Data successfully sent to Vijay's Email via Formspree!");
+        }
+    })
+    .catch(error => console.log("Formspree Error:", error));
+}
+</script>
+
+</body>
+</html>
