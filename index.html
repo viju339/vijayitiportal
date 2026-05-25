@@ -16,6 +16,209 @@
         /* संपूर्ण स्क्रीनचा फॉन्ट, पार्श्वभूमी रंग आणि कडांचे अंतर (Margin) सेट केले आहे */
         body { font-family: 'Segoe UI', sans-serif; background: var(--dark-bg); color: white; margin: 0; }
 
+      
+
+   /* ================= HERO PAGE ================= */
+
+.hero-section{
+   min-height:100vh;
+    background: linear-gradient(rgba(0, 0, 12, 0.13), rgba(0,0,20,0.95)),
+    url('https://tse1.mm.bing.net/th/id/OIP.sP65YOSrTTDpQSQJ9QwXdQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3');
+    background-size:center;
+    background-position:center;
+    padding-bottom:40px;
+}}
+
+.top-navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+    font-size:2rem;
+    font-weight:bold;
+    color:white;
+}
+
+.logo span{
+    color:var(--neon-cyan);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+    font-weight:500;
+}
+
+.nav-links a:hover{
+    color:var(--neon-cyan);
+}
+
+.login-btn{
+    background:linear-gradient(45deg,#4b4bff,#8a2be2);
+    padding:12px 22px;
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.hero-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:60px;
+    flex-wrap:wrap;
+}
+
+.hero-left{
+    flex:1;
+    min-width:320px;
+}
+
+.hero-left h1{
+    font-size:4rem;
+    margin-bottom:15px;
+    line-height:1.1;
+}
+
+.hero-left h1 span{
+    color:var(--neon-cyan);
+}
+
+.hero-left p{
+    font-size:1.2rem;
+    color:#ccc;
+    line-height:1.7;
+    max-width:600px;
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.hero-btn{
+    padding:15px 28px;
+    border-radius:10px;
+    border:none;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.start-btn{
+    background:linear-gradient(45deg,#00f2ff,#0066ff);
+    color:black;
+}
+
+.performance-btn{
+    background:transparent;
+    border:1px solid var(--neon-cyan);
+    color:white;
+}
+
+.hero-btn:hover{
+    transform:translateY(-3px);
+}
+
+.hero-right{
+    flex:1;
+    text-align:center;
+    min-width:300px;
+}
+
+.hero-right img{
+    width:90%;
+    max-width:500px;
+    filter:drop-shadow(0 0 20px #00f2ff);
+}
+
+.quote-box{
+    margin-top:25px;
+    border:1px solid rgba(255,255,255,0.2);
+    padding:20px;
+    border-radius:15px;
+    display:inline-block;
+    color:white;
+    font-size:1.2rem;
+}
+
+.quote-box span{
+    color:var(--neon-cyan);
+}
+
+/* ================= PARTICIPANTS ================= */
+
+.team-section{
+    padding:40px;
+    text-align:center;
+}
+
+.team-title{
+    font-size:3rem;
+    color:var(--neon-cyan);
+    margin-bottom:10px;
+}
+
+.team-sub{
+    color:#aaa;
+    margin-bottom:40px;
+}
+
+.participants{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.member-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px;
+    padding:25px;
+    transition:0.3s;
+    backdrop-filter:blur(8px);
+}
+
+.member-card:hover{
+    transform:translateY(-10px);
+    border-color:var(--neon-cyan);
+    box-shadow:0 0 20px rgba(0,242,255,0.4);
+}
+
+.member-card img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    margin-bottom:15px;
+    border:3px solid var(--neon-cyan);
+}
+
+.member-card h3{
+    margin:10px 0 5px;
+}
+
+.member-card p{
+    color:#aaa;
+}
+
+
+
         /* मुख्य हेडर पट्टीचे (Navbar) डिझाईन आणि त्याचा रंग */
         .navbar { background: var(--ncvt-blue); color: white; padding: 15px; text-align: center; font-size: 1.3rem; font-weight: bold; border-bottom: 3px solid var(--neon-cyan); }
         
@@ -72,11 +275,115 @@
         .btn-next { background: var(--neon-cyan); color: black; } /* पुढच्या प्रश्नाचे बटन */
         .btn-review { background: #f39c12; color: white; margin-top: 10px; } /* रिव्ह्यू शीट उघडण्याचे बटन */
         .hidden { display: none !important; } /* कॉम्प्युटर स्क्रीनवरील गोष्टी लपवण्यासाठीचा स्पेशल क्लास */
-
     </style>
 </head>
-<body>
+<body> 
 
+     <!-- ================= HERO LANDING PAGE ================= -->
+
+<section class="hero-section">
+
+    <div class="top-navbar">
+
+        <div class="logo">
+            ITI <span>MOCKTEST</span>
+        </div>
+
+    </div>
+
+    <div class="hero-content">
+
+        <div class="hero-left">
+
+            <h1>
+                D.B.PATIL <br>
+                <span>ITI COLLEGE BELAPUR</span>
+            </h1>
+
+            <p>
+                Prepare. Practice. Perform. <br><br>
+
+                Your one-stop platform for ITI exam preparation with
+                high quality mock tests, subject wise practice
+                and performance analysis.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="hero-btn start-btn"
+                        onclick="document.getElementById('main-menu').scrollIntoView({behavior:'smooth'})">
+                    🚀 Start Mock Test
+                </button>
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="https://tse3.mm.bing.net/th/id/OIP.7JHuKJ-ghLXuI7XwbUD4aAAAAA?w=320&h=259&rs=1&pid=ImgDetMain&o=7&rm=3">
+
+            <div class="quote-box">
+                “ Skill Today, <span>Success Tomorrow</span> ”
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= TEAM SECTION ================= -->
+
+    <div class="team-section">
+
+        <div class="team-title">BYTE BUILDERS</div>
+
+        <div class="team-sub">
+            BUILDING IDEAS. CODING FUTURES.
+        </div>
+
+        <div class="participants">
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                <h3>VIJAY JADHAV</h3>
+                <p>Participant</p>
+            </div>
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png">
+                <h3>NAVIN MHATRE</h3>
+                <p>Participant</p>
+            </div>
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/4140/4140051.png">
+                <h3>PRALHAS RANPISE</h3>
+                <p>Participant</p>
+            </div>
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png">
+                <h3>BHAGYASHREE KOLI</h3>
+                <p>Participant</p>
+            </div>
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png">
+                <h3>MAITHILI PATIL</h3>
+                <p>Participant</p>
+            </div>
+
+            <div class="member-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/6997/6997662.png">
+                <h3>NIMISHA PATIL</h3>
+                <p>Participant</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+   
 <div class="navbar">ITI CBT EXAM PORTAL - NCVT MOCK TEST</div>
 
 <div class="container">
@@ -84,7 +391,7 @@
     <div id="main-menu">
         <div class="menu-card" style="padding: 20px; text-align: center; margin-bottom: 20px;">
             <h3 style="color: var(--neon-cyan); margin-top: 0; letter-spacing: 1px;">STUDENT REGISTRATION / विद्यार्थी नोंदणी</h3>
-            <input type="text" id="student-name" placeholder="Enter Your Full Name Here / तुमचे नाव टाका"
+            <input type="text" id="student-name" placeholder="Enter Your Full Name Here / तुमचे नाव टाका" 
                    style="width: 85%; padding: 12px; border-radius: 6px; border: 1px solid var(--neon-cyan); background: rgba(0,0,0,0.3); color: white; font-size: 1rem; text-align: center; outline: none;">
         </div>
 
@@ -119,6 +426,7 @@
         <div class="menu-item" onclick="startExam('Communication')">Communication Skills | संचार कौशल</div>
     </div>
 
+
     <div id="exam-box" class="exam-box">
         <div class="timer-container">
             <div class="timer-circle" id="timer">30</div>
@@ -128,6 +436,7 @@
         <h3 id="q-text">Loading...</h3> <div id="options-box"></div> <div style="margin-top:20px; display:flex; justify-content:flex-end;">
             <button class="btn btn-next" onclick="move(1)">Save & Next</button> </div>
     </div>
+    
 
     <div id="result-screen" class="menu-card hidden">
         <div class="result-card">
@@ -144,6 +453,8 @@
     </div>
 
 </div>
+
+
 
 <script> /* इथून मुख्य प्रोग्रामिंग (लॉजिक मेंदू) आणि सुरक्षेचा जावास्क्रिप्ट कोड सुरू होतो */
 
@@ -538,6 +849,10 @@
     document.onselectstart = function() {
         return false; // यामुळे परीक्षा चालू असताना विद्यार्थी प्रश्न कॉपी करून गुगलवर टाकू शकत नाहीत
     };
+
+    
+
+   
 </script>
 
 </body> </html> ```
