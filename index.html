@@ -813,6 +813,33 @@ database.ref("students/" + Date.now()).set({
     time: new Date().toLocaleString()
 });
 
+       // बॅकएंड सर्व्हरवर पाठवण्यासाठी सर्व माहितीचे पाकीट (JSON Object) तयार करणे
+        const dataToSend = {
+            studentName: studentName,
+            correctAnswers: rightCount,
+            wrongAnswers: wrongCount,
+            skippedQuestions: skippedCount,
+            totalScore: `${rightCount} / ${currentSet.length}`,
+            percentage: `${percent}%`
+        };
+
+        // Fetch / AJAX चा वापर करून बॅकग्राउंडला युझरचा डेटा सुरक्षितपणे विजयच्या ईमेलवर फॉरवर्ड करणे
+        fetch(`https://formspree.io/f/${formspreeId}`, {
+            method: "POST", // डेटा पाठवण्यासाठी 'POST' पद्धत वापरली आहे
+            headers: {
+                "Content-Type": "application/json", // पाठवला जाणारा डेटा JSON फॉरमॅटमध्ये आहे हे सांगणे
+                "Accept": "application/json" // सर्व्हरकडून येणारा रिस्पॉन्स देखील JSON मध्ये स्वीकारणे
+            },
+            body: JSON.stringify(dataToSend) // ऑब्जेक्टचे मजकुरात (String) रूपांतर करून पाठवणे
+        })
+        .then(response => {
+            if (response.ok) { // डेटा यशस्वीरीत्या ईमेलवर पोहचल्यास ब्राउझर कन्सोलमध्ये मेसेज दाखवणे
+                console.log("Data successfully sent to Vijay's Email via Formspree!");
+            }
+        })
+        .catch(error => console.log("Formspree Error:", error)); // इंटरनेट किंवा सर्व्हरमध्ये त्रुटी आल्यास एरर दाखवणे
+    }
+
     
 
     // ७. उत्तरपत्रिका पाहणे किंवा लपवणे (Toggle Button)
